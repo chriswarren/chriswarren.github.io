@@ -42,7 +42,11 @@ end
 
 Pretty straight forward - we've copied the first check from our interactor in to the `require_user` method, and set it up so the message can be overwritten if needed.
 
-Before we can use it in our interactors we'll want to make sure that our app knows to load these files. In a Rails app we'll add `config.autoload_paths += ["#{Rails.root}/app/interactors/concerns"]` to `application.rb`.
+Before we can use it in our interactors we'll want to make sure that our app knows to load these files. In a Rails app we'll add
+
+`config.autoload_paths += ["#{Rails.root}/app/interactors/concerns"]`
+
+to `application.rb`.
 
 Now that it's loaded and available (don't forget to restart your server and console so the change to `application.rb` takes effect), we can use it in our interactor.
 

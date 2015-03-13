@@ -41,7 +41,11 @@ end
 
 This interactor calculates usage based on variables that we're not worried about today. What we're looking at is how `add_billable_item` provides a common interface for tracking what we need to bill a customer for as calculated across multiple interactors with our application.
 
-`add_billable_item` is defined in the `BillableItems` module which is included near the top of the interactor. I like to keep files like this that are used across multiple interactors in `/app/interactors/concerns`. As mentioned in [part 1](/interactors/testing/2015/03/13/drying-interactors-part-1.html), we need to tell our application to load these files by adding `config.autoload_paths += ["#{Rails.root}/app/interactors/concerns"]` to `application.rb` if we're building a Rails app.
+`add_billable_item` is defined in the `BillableItems` module which is included near the top of the interactor. I like to keep files like this that are used across multiple interactors in `/app/interactors/concerns`. As mentioned in [part 1](/interactors/testing/2015/03/13/drying-interactors-part-1.html), we need to tell our application to load these files by adding
+
+`config.autoload_paths += ["#{Rails.root}/app/interactors/concerns"]`
+
+to `application.rb` if we're building a Rails app.
 
 {% highlight ruby %}
 module BillableItems
