@@ -181,4 +181,4 @@ Later, if you add more methods to the `UserRequirements` module you can add rela
 
 These aren't optimizations that need to be made immediately when using interactors, but I do use them as soon as I find myself requiring any common variables in more than one interactor, and especially when chaining interactors across organizers.
 
-This same approach can be used for more than just requiring variables be present. In my next post we'll explore a way of extracting common logic from interactors, like creating invoice items for a variety of items without duplicating logic.
+This same approach can be used for more than just requiring variables be present. In [part 2 of DRYing interactors with modules and shared examples](/interactors/testing/2015/03/13/drying-interactors-part-2.html) we'll explore a way of extracting common logic from interactors, like creating invoice items for a variety of items without duplicating logic.
