@@ -8,7 +8,7 @@ I've been using the [interactor gem](https://github.com/collectiveidea/interacto
 
 ## Modules for Common Contexts
 
-Interactors can be run individually or chained together using organizers. When using organizers it's important to make sure that the context items we're using are consistently named, otherwise we can end up with one interactor expecting `user` and one expecting `current_user`.
+Interactors can be run individually or chained together using organizers. When using organizers it's important to make sure that the context items we're using are consistently named, otherwise we might end up with one interactor expecting `user` and another expecting `current_user`.
 
 One way that I've handled this is by finding those common elements across many interactors and pulling checks for them out in to modules that can be included in all interactors that deal with those elements.
 
