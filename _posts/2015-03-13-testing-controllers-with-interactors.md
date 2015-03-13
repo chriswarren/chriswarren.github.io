@@ -6,7 +6,7 @@ categories: interactors testing
 
 One of my favorite developments from moving to [interactors](http://github.com/collectiveidea/interactor) in my Rails apps has been the way it's enabled me to clean up my controller tests. Before, my controller tests needed to know what combination of attributes would cause a failure when creating a new user, for example. If that changed, my tests broke.
 
-Really, all a controller test should be looking at is what happens when the call is successful, and what happens when it fails. Do we load the page? Do we redirect? Do we display a flash message? That's what really matters, and interactors make it pretty easy to do that.
+Really, all a controller test should be looking at is what happens when the call is successful, and what happens when it fails. Do we load the page? Do we redirect? Do we display a flash message? That's what really matters, and interactors make it easier to manage and test those scenarios without getting lost in the details of what makes it fail.
 
 ## Testing the Controller
 We know that the controller is going to hit our `CreateUser` interactor, and whether or not it is successful determines what the user sees next. Rather than concerning ourselves with how to create success or failure we can instead stub `CreateUser.call` and only test what the controller is actually responsible for.
@@ -77,12 +77,12 @@ private
 end
 {% endhighlight %}
 
-Interactors let our controller do nothing but pass params to `CreateUser` and nothing else. The business logic is compartmentalized in the interactor (or in multiple organized interactors, we don't even need to know at the ctonroller level). We don't need to worry about validating the email, tracking any metrics, or doing anything else in the controller.
+Interactors let our controller just pass params to `CreateUser` and not worrya bout anything else. The business logic is compartmentalized in the interactor (or in multiple organized interactors, we don't even need to know at the ctonroller level). We don't need to worry about validating the email, tracking any metrics, or doing anything else in the controller.
 
 All that matters when deciding what to do next is checking if `result.success?` is true or not. The controller is easy to understand, and the tests are equally easy to implement.
 
 ## Wrapping Up
-Obviously you could do something simliar by mocking `User.create` and returning a user double with `valid?` stubbed to true or false and achieve a similar result. I am not against this, but I belive that interactors are a superior approach to this, and to moving the manipulation of data to a single flow. I now do almost everything in interactors, even things that used to have in model callbacks.
+Obviously you could do something simliar by mocking `User.create` and returning a user double with `valid?` stubbed to true or false and achieve a similar result. I am not against this, but I belive that interactors are a superior approach to this, and to moving the manipulation of data to a single flow. I now do almost everything in interactors, even things that used to live in callbacks on the models.
 
 When we decide to put our business logic in to interactors there are lots of benefits across the app. Already skinny controllers can get even skinnier, and their tests get even simpler to understand and create. The tests can stop worrying about how to make something fail and instead worry about what happens when it does.
 

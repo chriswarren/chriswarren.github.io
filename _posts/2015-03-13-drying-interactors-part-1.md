@@ -4,7 +4,7 @@ title: DRYing Interactors with Modules and Shared Examples, Part 1
 categories: interactors testing
 ---
 
-I've been using the [interactor gem](https://github.com/collectiveidea/interactor) in my Rails apps lately and I love the way they simplify complex logic and help clarify what my apps do. As I've worked with them I've developed a few testing tricks using modules and shared examples that've helped make the interactors and their tests cleaner and more consistent.
+I've been using the [interactor gem](https://github.com/collectiveidea/interactor) in my Rails apps lately and I love the way they simplify complex logic and help clarify what my apps do. As I've worked with them I've developed a few testing tricks using modules and shared examples that have helped make the interactors and their tests cleaner and more consistent.
 
 ## Modules for Common Contexts
 
