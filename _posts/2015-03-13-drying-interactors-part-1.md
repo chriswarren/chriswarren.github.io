@@ -35,7 +35,7 @@ module UserRequirements
 
 private
   def require_user(message: "User required.")
-  context.fail!(message: message) unless context.user.present?
+    context.fail!(message: message) unless context.user.present?
   end
 end
 {% endhighlight %}
@@ -56,9 +56,8 @@ class AddUserToAccount
   include UserRequirements
 
   def call
-  require_user
+    require_user
     context.fail!(message: "Account required.") unless context.account.present?
-
     context.account.users << context.user
   end
 end
