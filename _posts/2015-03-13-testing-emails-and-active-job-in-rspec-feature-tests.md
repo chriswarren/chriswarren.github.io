@@ -9,7 +9,7 @@ Before `ActiveJob` you could just access `ActionMailer::Base.deliveries` and get
 
 Since `ActiveJob` and `ActionMailer`'s `.deliver_later` queue up jobs to process later, you need to actually process the queue before you can access the email. To do this you need to first include `ActiveJob::TestHelper` in your feature spec. This gives access to a few methods, but the one that we need is `perform_enqueued_jobs`.
 
-```
+{% highlight ruby %}
 # /spec/features/password_reset_spec.rb
 require "rails_helper"
 include "ActiveJob::TestHelper"
@@ -47,15 +47,15 @@ feature "User Password Reset", type: :feature do
     expect(current_path).to eq "/user"
   end
 end
-```
+{% endhighlight %}
 
 `perform_enqueued_jobs` takes a block and performs any jobs in the `ActiveJob` queue after the block has completed. We pass the `click_button "Reset Password"` line in, and when that button is clicked the controller for password resets handles the process of generating the password reset email and putting it in to the queue. Without calling `perform_enqueued_jobs`, that's where it would sit, unprocessed and unavailable to our tests.
 
-```
+{% highlight ruby %}
 perform_enqueued_jobs do
   click_button "Reset Password"
 end
-```
+{% endhighlight %}
 
 Since the queue is processed, the email is now available for us to access. In this case I am using the [capybara-email](https://github.com/dockyard/capybara-email) gem to access the email and follow the link to it. From there everything continues as any normal feature spec would.
 
