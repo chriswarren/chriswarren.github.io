@@ -4,7 +4,7 @@ title: DRYing Interactors with Modules and Shared Examples, Part 1
 categories: interactors testing
 ---
 
-I've been using [Interactors](https://github.com/collectiveidea/interactor) in my Rails apps lately and I love the way they simplify complex logic and help clarify what my apps do. As I've worked with them I've developed a few testing tricks using concerns and shared examples that've helped make the interactors and their tests cleaner and more consistent.
+I've been using the [interactor gem](https://github.com/collectiveidea/interactor) in my Rails apps lately and I love the way they simplify complex logic and help clarify what my apps do. As I've worked with them I've developed a few testing tricks using concerns and shared examples that've helped make the interactors and their tests cleaner and more consistent.
 
 ## Concerns for Common Contexts
 
@@ -64,7 +64,7 @@ That's all it takes to start using the module and simplify the user requirement 
 
 ## Testing
 
-I assume you already have some tests for your interactor and confirmed that these changes didn't break anything. Awesome. Now let's take some steps to simplify our interactor tests using shared concerns, a feature of RSpec.
+I assume you already have some tests for your interactor and confirmed that these changes didn't break anything. Awesome. Now let's take some steps to simplify our interactor tests using shared concerns, a feature of [RSpec](http://rspec.info).
 
 Since we're moving our checks for users to a module to reduce repetition, it makes sense to do the same thing for our tests as well. Plus, with shared concerns it's easy to be even a little more thorough since the tests are slightly hidden from the actual spec files.
 

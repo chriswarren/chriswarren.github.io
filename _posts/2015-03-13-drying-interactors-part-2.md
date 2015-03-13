@@ -4,7 +4,7 @@ title: DRYing Interactors with Modules and Shared Examples, Part 2
 categories: interactors testing
 ---
 
-In the first post on DRYing Interactors we looked at creating modules and shared examples to simplify the process of checking the variables passed to interactors. Now we'll take things further and add some more complex functionality to a module by handling the process of creating billable items. In addition to adding methods to call from the interactors we'll also hook in a before block and create a rollback method from the module.
+In the [first post on DRYing interactors](/interactors/testing/2015/03/13/drying-interactors-part-1.html) we looked at creating modules and shared examples to simplify the process of checking the variables passed to interactors. Now we'll take things further and add some more complex functionality to a module by handling the process of creating billable items. In addition to adding methods to call from the interactors we'll also hook in a before block and create a rollback method from the module.
 
 In the app I first wrote this for we have several interactors that calculate billing information on a variety of metrics. Initially all calculations had been done in a single interactor, but the file quickly got too long and did too much. Interactors should do a single unit of work, and the more you follow this rule the happier you'll be in the long run.
 
@@ -41,7 +41,7 @@ end
 
 This interactor calculates usage based on variables that we're not worried about today. What we're looking at is how `add_billable_item` provides a common interface for tracking what we need to bill a customer for as calculated across multiple interactors with our application.
 
-`add_billable_item` is defined in the `BillableItems` module which is included near the top of the interactor. I like to keep files like this that are used across multiple interactors in `/app/interactors/concerns`. As mentioned in Part 1, we need to tell our application to load these files by adding `config.autoload_paths += ["#{Rails.root}/app/interactors/concerns"]` to `application.rb` if we're building a Rails app.
+`add_billable_item` is defined in the `BillableItems` module which is included near the top of the interactor. I like to keep files like this that are used across multiple interactors in `/app/interactors/concerns`. As mentioned in [part 1](/interactors/testing/2015/03/13/drying-interactors-part-1.html), we need to tell our application to load these files by adding `config.autoload_paths += ["#{Rails.root}/app/interactors/concerns"]` to `application.rb` if we're building a Rails app.
 
 {% highlight ruby %}
 module BillableItems
@@ -162,7 +162,7 @@ In my real world usage I also have methods to calculate the total charges contai
 
 ## Tests
 
-Last but not least (and they probably should've been first) are the tests. As in part 1, RSpec's shared examples play a big part in keeping tests clean and repeatable.
+Last but not least (and they probably should've been first) are the tests. As in [part 1](/interactors/testing/2015/03/13/drying-interactors-part-1.html), RSpec's shared examples play a big part in keeping tests clean and repeatable.
 
 {% highlight ruby %}
 require "rails_helper"
@@ -196,12 +196,6 @@ describe CalculateUsage do
       )
     end
   end
-
-  describe ".rollback" do
-    it_behaves_like "billable items are rolled back" do
-      let(:interactor_parameters){ { account: account } }
-    end
-  end
 end
 {% endhighlight %}
 
@@ -223,9 +217,18 @@ RSpec.shared_examples "it has billable items of :type matching :description" do 
     ).to include(description)
   end
 end
+{% endhighlight %}
 
+Our shared examples here vary from what we used in [part 1](/interactors/testing/2015/03/13/drying-interactors-part-1.html) because they are receiving variables that we're using to populate the tests. This allows us the flexibility of testing for the actual values we expect, without requiring every interactor that involves billing calculations to get in to the nitty gritty of how a `billable_item` is structured.
+
+Since we're also managing part of the rollback process from the module, we should also test that with a shared example.
+
+{% highlight ruby %}
 RSpec.shared_examples "billable items are rolled back" do
-  it{ expect(described_class.included_modules.include?(BillableItems)).to be true }
+  it "includes the BillableItems module" do
+    expect(described_class.included_modules.include?(BillableItems))
+      .to be true
+  end
 
   context "billable items are rolled back" do
     before{ interactor_parameters ||= {} }
@@ -242,7 +245,9 @@ RSpec.shared_examples "billable items are rolled back" do
     end
 
     let(:billable_items){ [{ description: "x", amount_in_cents: 200 }] }
-    let(:original_billable_items){ [[{ description: "x", amount_in_cents: 200 }]] }
+    let(:original_billable_items) do
+      [[{ description: "x", amount_in_cents: 300 }]]
+    end
 
     let(:context){ interactor.context }
 
@@ -260,7 +265,7 @@ RSpec.shared_examples "billable items are rolled back" do
 end
 {% endhighlight %}
 
-Our shared examples here vary from what we used in part 1 because they are receiving variables that we're using to populate the tests. This allows us the flexibility of testing for the actual values we expect, without requiring every interactor that involves billing calculations to get in to the nitty gritty of how a `billable_item` is structured.
+In addition to making sure that the `BillableItems` module is included in the class, we test that rollback works as expected. Since our tests don't run the interactors in an organizer we need to build up the `original_billable_items` array by hand, then make sure that adding a new billable item grows the history array, and srhinks it back down after rollback.
 
 ## Wrapping Up
 A big part of the power of interactors is their ability to simplify and compartmentalize business logic in our applications. Moving common functionality, and the tests that deal with that functionality, out in to modules and shared examples helps us keep interactors simple, consistent, and understandable, without sacrificing capability.
