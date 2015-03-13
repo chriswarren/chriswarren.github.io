@@ -1,3 +1,9 @@
+---
+layout: post
+title: Simplifying Controller Testing with Interactors
+categories: interactors testing
+---
+
 One of my favorite developments from moving to [interactors](http://github.com/collectiveidea/interactor) in my Rails apps has been the way it's enabled me to clean up my controller tests. Before, my controller tests needed to know what combination of attributes would cause a failure when creating a new user, for example. If that changed, my tests broke.
 
 Really, all a controller test should be looking at is what happens when the call is successful, and what happens when it fails. Do we load the page? Do we redirect? Do we display a flash message? That's what really matters, and interactors make it pretty easy to do that.
