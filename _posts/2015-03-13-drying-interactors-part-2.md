@@ -13,6 +13,7 @@ In the app I first wrote this for we have several interactors that calculate bil
 The core of the module we're setting up is to add a billable item to an array. Later we'll pass this array to another interactor, which will handle the process of charging for these items. That process will depend on the billing provider you're using, so we won't get in to that in this post.
 
 {% highlight ruby %}
+# app/interactors/calculate_usage.rb
 class CalculateUsage
   include Interactor
   include BillableItems
@@ -48,6 +49,7 @@ This interactor calculates usage based on variables that we're not worried about
 to `application.rb` if we're building a Rails app.
 
 {% highlight ruby %}
+# app/interactors/concerns/billable_items.rb
 module BillableItems
 
 private
@@ -68,6 +70,7 @@ Right now the module just includes a single private method, `add_billable_item`,
 Interactors allow us to prepare things prior to running in a `before` hook. This is a good place to set up things like the billable items array we want to add our charges to, but in order to do so from our module we have to approach things a little differently than when we add a method.
 
 {% highlight ruby %}
+# app/interactors/concerns/billable_items.rb
 module BillableItems
   def self.included(base)
     base.class_eval do
@@ -91,6 +94,7 @@ Interactor rollback is called whenever an organized interactor fails, which give
 First we need to know what the `billable_items` array looked like before we added anything to it. The easiest time to set this up is in the `before` hook that we just set up.
 
 {% highlight ruby %}
+# app/interactors/concerns/billable_items.rb
 module BillableItems
   def self.included(base)
     base.class_eval do
@@ -112,6 +116,7 @@ To start off we make sure that there's an `original_billable_items` array on the
 Now that we have our history in place we can define the `rollback` method.
 
 {% highlight ruby %}
+# app/interactors/concerns/billable_items.rb
 module BillableItems
   def self.included(base)
     ...
@@ -134,6 +139,7 @@ end
 We've only looked at parts of the module as we've stepped through the pieces, so here's what the whole thing looks like:
 
 {% highlight ruby %}
+# app/interactors/concerns/billable_items.rb
 module BillableItems
   def self.included(base)
     base.class_eval do
@@ -169,6 +175,7 @@ In my real world usage I also have methods to calculate the total charges contai
 Last but not least (and they probably should've been first) are the tests. As in [part 1](/interactors/testing/2015/03/13/drying-interactors-part-1.html), RSpec's shared examples play a big part in keeping tests clean and repeatable.
 
 {% highlight ruby %}
+# spec/interactors/calculate_usage_spec.rb
 require "rails_helper"
 
 describe CalculateUsage do
@@ -206,6 +213,7 @@ end
 By using shared examples we have an easily reusable set of tests that confirm that our calculations and billable item descriptions are being generated as expected.
 
 {% highlight ruby %}
+# spec/support/shared_examples_for_interactors_with_billable_items.rb
 RSpec.shared_examples "it has billable items of :type totaling :amount_in_cents" do |type, amount|
   it "has billable items of #{type} totaling #{amount}"do
     expect(
@@ -228,6 +236,7 @@ Our shared examples here vary from what we used in [part 1](/interactors/testing
 Since we're also managing part of the rollback process from the module, we should also test that with a shared example.
 
 {% highlight ruby %}
+# spec/support/shared_examples_for_interactors_with_billable_items.rb
 RSpec.shared_examples "billable items are rolled back" do
   it "includes the BillableItems module" do
     expect(described_class.included_modules.include?(BillableItems))

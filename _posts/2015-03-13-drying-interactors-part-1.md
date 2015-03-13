@@ -15,6 +15,7 @@ One way that I've handled this is by finding those common elements across many i
 Consider the following interactor:
 
 {% highlight ruby %}
+# app/interactors/add_user_to_account.rb
 class AddUserToAccount
   include Interactor
 
@@ -51,6 +52,7 @@ to `application.rb`.
 Now that it's loaded and available (don't forget to restart your server and console so the change to `application.rb` takes effect), we can use it in our interactor.
 
 {% highlight ruby %}
+# app/interactors/add_user_to_account.rb
 class AddUserToAccount
   include Interactor
   include UserRequirements
@@ -74,11 +76,12 @@ Since we're moving our checks for users to a module to reduce repetition, it mak
 Here's our starter test for the interactor we worked on earlier, which lives at `spec/interactors/add_user_to_account_spec.rb`.
 
 {% highlight ruby %}
+# spec/interactors/add_user_to_account_spec.rb
 require "rails_helper"
 
-describe AssignUserToAccount do
+describe AddUserToAccount do
   let(:interactor) do
-    AssignUserToAccount.call(
+    AddUserToAccount.call(
       account: account,
       user: user
     )
@@ -107,6 +110,7 @@ end
 Now let's move the checks that make sure a user is present in the context to a shared concern.
 
 {% highlight ruby %}
+# spec/support/shared_examples_for_interactors_with_users.rb
 RSpec.shared_examples "a user is required" do
   context "without a user" do
     let(:user){ nil }
@@ -118,11 +122,12 @@ end
 With the spec logic duplicated from `add_user_to_account_spec.rb`, we'll start by replacing that logic from the shared concern.
 
 {% highlight ruby %}
+# spec/interactors/add_user_to_account_spec.rb
 require "rails_helper"
 
-describe AssignUserToAccount do
+describe AddUserToAccount do
   let(:interactor) do
-    AssignUserToAccount.call(
+    AddUserToAccount.call(
       account: account,
       user: user
     )
@@ -148,6 +153,7 @@ end
 Now, let's expand on the shared concern to make it more thorough. Since we want to make sure that any interactor that requires a user is using the `UserRequirements` module, we can easily add a check that it is being included. This is an easy way to enforce consistent usage of the file and naming conventions across interactors.
 
 {% highlight ruby %}
+# spec/support/shared_examples_for_interactors_with_users.rb
 RSpec.shared_examples "UserRequirements is included" do
   it "has included UserRequirements" do
     expect(
