@@ -4,9 +4,9 @@ title: DRYing Interactors with Modules and Shared Examples, Part 1
 categories: interactors testing
 ---
 
-I've been using the [interactor gem](https://github.com/collectiveidea/interactor) in my Rails apps lately and I love the way they simplify complex logic and help clarify what my apps do. As I've worked with them I've developed a few testing tricks using concerns and shared examples that've helped make the interactors and their tests cleaner and more consistent.
+I've been using the [interactor gem](https://github.com/collectiveidea/interactor) in my Rails apps lately and I love the way they simplify complex logic and help clarify what my apps do. As I've worked with them I've developed a few testing tricks using modules and shared examples that've helped make the interactors and their tests cleaner and more consistent.
 
-## Concerns for Common Contexts
+## Modules for Common Contexts
 
 Interactors can be run individually or chained together using organizers. When using organizers it's important to make sure that the context items we're using are consistently named, otherwise we can end up with one interactor expecting `user` and one expecting `current_user`.
 
@@ -64,9 +64,9 @@ That's all it takes to start using the module and simplify the user requirement 
 
 ## Testing
 
-I assume you already have some tests for your interactor and confirmed that these changes didn't break anything. Awesome. Now let's take some steps to simplify our interactor tests using shared concerns, a feature of [RSpec](http://rspec.info).
+I assume you already have some tests for your interactor and confirmed that these changes didn't break anything. Awesome. Now let's take some steps to simplify our interactor tests using shared examples, a feature of [RSpec](http://rspec.info).
 
-Since we're moving our checks for users to a module to reduce repetition, it makes sense to do the same thing for our tests as well. Plus, with shared concerns it's easy to be even a little more thorough since the tests are slightly hidden from the actual spec files.
+Since we're moving our checks for users to a module to reduce repetition, it makes sense to do the same thing for our tests as well. Plus, with shared examples it's easy to be even a little more thorough since the tests are slightly hidden from the actual spec files.
 
 Here's our starter test for the interactor we worked on earlier, which lives at `spec/interactors/add_user_to_account_spec.rb`.
 
