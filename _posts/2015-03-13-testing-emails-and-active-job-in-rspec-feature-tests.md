@@ -12,7 +12,7 @@ Since `ActiveJob` and `ActionMailer`'s `.deliver_later` queue up jobs to process
 {% highlight ruby %}
 # /spec/features/password_reset_spec.rb
 require "rails_helper"
-include "ActiveJob::TestHelper"
+include ActiveJob::TestHelper
 
 feature "User Password Reset", type: :feature do
   before do
