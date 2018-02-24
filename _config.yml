@@ -1,8 +1,8 @@
 # Site settings
 title: Chris Warren
-email: chris@expectless.com
+email: me@chriswarren.net
 description: > # this means to ignore newlines until "baseurl:"
-  Adventures in programming, remote working, and Minnesota
+  Adventures in programming, remote working, bikes, and Minnesota
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://chriswarren.github.io" # the base hostname & protocol for your site
 twitter_username: cdwarren
