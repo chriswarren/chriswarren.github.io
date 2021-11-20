@@ -14,46 +14,48 @@ Then add the following as the script:
 
 {% highlight applescript %}
 on getMicrophoneVolume()
-	input volume of (get volume settings)
+  input volume of (get volume settings)
 end getMicrophoneVolume
 on disableMicrophone()
-	set volume input volume 0
+  set volume input volume 0
 end disableMicrophone
 on enableMicrophone()
-	set volume input volume 100
+  set volume input volume 100
 end enableMicrophone
 
 on setUnmutedLights()
-	tell application "PowerMate"
-		set aDevice to first device
-		tell aDevice
-			make light state with properties {state type:counter, pulse count:50, pulse length:0.1, name:"Alert x3"}
-		end tell
-	end tell
+  tell application "PowerMate"
+    set aDevice to first device
+    tell aDevice
+      make light state with properties {state type:counter, pulse count:50, pulse length:0.1, name:"Alert x3"}
+    end tell
+  end tell
 end setUnmutedLights
 
 on setMutedLights()
-	tell application "PowerMate"
-		set aDevice to first device
-		tell aDevice
-			make light state with properties {state type:steady, brightness:0.0, name:"Off"}
-		end tell
-	end tell
+  tell application "PowerMate"
+    set aDevice to first device
+    tell aDevice
+      make light state with properties {state type:steady, brightness:0.0, name:"Off"}
+    end tell
+  end tell
 end setMutedLights
 
 if getMicrophoneVolume() is greater than 0 then
-	disableMicrophone()
-	setMutedLights()
+  disableMicrophone()
+  setMutedLights()
 else
-	enableMicrophone()
-	setUnmutedLights()
+  enableMicrophone()
+  setUnmutedLights()
 end if
 {% endhighlight %}
 
 When this runs, pressing the button will check if the system input volume is 0 or 100. If it's 0, we set it to 100 (mic is now active) and the lights on the PowerMate start blinking. Pressing the button when the system input volume is 100 will drop it to 0 (mic is muted) and the blinking light will turn off.
 
 You can change the pulse rate on the button if you find it annoying, just mess around with this line and tweak the pulse count and length to your needs:
-`make light state with properties {state type:counter, pulse count:50, pulse length:0.1, name:"Alert x3"}`
+```
+make light state with properties {state type:counter, pulse count:50, pulse length:0.1, name:"Alert x3"}
+```
 
 I like having the light blinking quickly, so that I am more likely to notice if I forgot to mute the mic. I do not want to accidentally say something over a call when I thought I was muted.
 
