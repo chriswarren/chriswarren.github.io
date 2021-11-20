@@ -12,7 +12,7 @@ To make your own button, just download the software from Griffin and set it up a
 
 Then add the following as the script:
 
-```
+{% highlight applescript %}
 on getMicrophoneVolume()
 	input volume of (get volume settings)
 end getMicrophoneVolume
@@ -48,7 +48,7 @@ else
 	enableMicrophone()
 	setUnmutedLights()
 end if
-```
+{% endhighlight %}
 
 When this runs, pressing the button will check if the system input volume is 0 or 100. If it's 0, we set it to 100 (mic is now active) and the lights on the PowerMate start blinking. Pressing the button when the system input volume is 100 will drop it to 0 (mic is muted) and the blinking light will turn off.
 
