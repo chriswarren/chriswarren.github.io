@@ -62,5 +62,5 @@ Example video is coming soon.
 References:
 
 These posts were immensely helpful in figuring out getting the PowerMate working and the AppleScript doing what I wanted.
-* https://www.somegeekintn.com/blog/2010/07/secrets-of-powermate-3-0/
-* https://medium.com/macoclock/how-in-the-bleep-do-i-mute-my-mic-anywhere-on-macos-d2fa1185b13
+* [Secreted of PowerMate 3.0](https://www.somegeekintn.com/blog/2010/07/secrets-of-powermate-3-0/)
+* [How in the bleep do I mute my mic anywhere on MacOS](https://medium.com/macoclock/how-in-the-bleep-do-i-mute-my-mic-anywhere-on-macos-d2fa1185b13)
