@@ -1,0 +1,25 @@
+{
+    "subject":"acct:chriswarren@ruby.social",
+    "aliases":
+    [
+        "https://ruby.social/@chriswarren",
+        "https://ruby.social/users/chriswarren"
+    ],
+    "links":
+    [
+        {
+            "rel":"http://webfinger.net/rel/profile-page",
+            "type":"text/html",
+            "href":"https://ruby.social/@chriswarren"
+        },
+        {
+            "rel":"self",
+            "type":"application/activity+json",
+            "href":"https://ruby.social/users/chriswarren"
+        },
+        {
+            "rel":"http://ostatus.org/schema/1.0/subscribe",
+            "template":"https://hachyderm.io/authorize_interaction?uri={uri}"
+        }
+    ]
+}
