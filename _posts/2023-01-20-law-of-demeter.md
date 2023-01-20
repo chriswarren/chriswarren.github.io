@@ -4,7 +4,7 @@ title: How I Think About The Law of Demeter
 categories: programming
 ---
 
-[The Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter) is a programming concept people are often aware of, but that can be very easy to skip over or not notice as its happening. I've found a metaphor that has worked fairly well at helping think about it and explain why we should avoid it.
+[The Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter) is a programming concept people are often aware of, but that can be very easy to skip over or not notice as its happening. I've found a metaphor that has worked fairly well at helping think about it and explain why we should avoid violating LoD.
 
 I got started thinking about this idea after a comment on [an episode of The Bike Shed](https://www.bikeshed.fm/353) where they talked about considering a person reaching in to another's backpack to take something from it. This concept has worked well for me in discussing LoD with others.
 
