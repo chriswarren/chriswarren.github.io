@@ -4,6 +4,10 @@ title: About
 permalink: /about/
 ---
 
-Chris is a software developer, currently working on [Zencoder](http://zencoder.com) at [Brightcove](http://brightcove.com).
+I live in Minneapolis, MN, USA with my family and like to spend my time riding bikes as much as I can.
 
-He lives in Minneapolis, MN with his family and likes to spend his free time riding bikes and trying to learn about home improvement and wood working.
+I've worked remotely since 2014 and I love it.
+
+I spend a lot of time thinking about clear code, software development practices, and remote work.
+
+I work at [Arux Software](https://arux.software) as a Principal Developer.
