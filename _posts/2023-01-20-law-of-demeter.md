@@ -10,9 +10,9 @@ I got started thinking about this idea after a comment on [an episode of The Bik
 
 Let's say I'm adminstering a test for you, and you're not allowed to leave the room during the test.
 
-If you need a pen, you can ask me for one. I will then leave the room and come back. Maybe I'll have a pen for you.
+If you need a pen, you can ask me for one. I will then leave the room for a minute.
 
-I might come back a pen, or I might tell you I couldn't fid one. You don't get to know if I have pens available and decide for yourself to take one.
+I might come back with a pen, or I might tell you I couldn't find one. You don't get to know if I have pens available and decide for yourself to take one.
 
 If I do give you a pen, you don't need to know where it came from. It shouldn't matter if I got it from my backpack, my desk, or if I asked another person to give it to me.
 
