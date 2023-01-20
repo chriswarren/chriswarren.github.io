@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How I Explain Violating the Law of Demeter
+title: How I Think About The Law of Demeter
 categories: programming
 ---
 
@@ -8,14 +8,18 @@ categories: programming
 
 I got started thinking about this idea after a comment on [an episode of The Bike Shed](https://www.bikeshed.fm/353) where they talked about considering a person reaching in to another's backpack to take something from it. This concept has worked well for me in discussing LoD with others.
 
-If you need a pen, you can ask me if I have one I can give you.
+Let's say I'm adminstering a test for you, and you're not allowed to leave the room during the test.
 
-I might give you a pen, or I might tell you I can't. You don't get to know if I have pens available and decide for yourself to take one.
+If you need a pen, you can ask me for one. I will then leave the room and come back. Maybe I'll have a pen for you.
+
+I might come back a pen, or I might tell you I couldn't fid one. You don't get to know if I have pens available and decide for yourself to take one.
 
 If I do give you a pen, you don't need to know where it came from. It shouldn't matter if I got it from my backpack, my desk, or if I asked another person to give it to me.
 
-I hope you wouldn't dig through my backpack, rifle through my desk, or take my phone and text my friends to ask for a pen.
+Also, I hope you wouldn't dig through my backpack, rifle through my desk, or take my phone and text my friends to ask if they have a pen for you.
 
-And in the opposite direction, I hope you wouldn't put a pen (or anything else) in my backpack. While I might appreciate the gift, I should be able to accept the pen from you directly and then decide where I want to put it.
+Conversely, I hope you wouldn't put a pen (or anything else) in my backpack. While I might appreciate the gift, I should be able to accept the pen from you directly and then decide where I want to keep it.
 
-The Law of Demeter wants us to show similar restraint in how we get and set data between objects. Delegate responsibility to the objects themselves, rather than reaching in to them directly. Avoid surprises, side effects, and letting objects know too much about each other.
+The Law of Demeter says we should show similar restraint in how we get and set data between objects in our systems. Delegate responsibility to the objects themselves, rather than reaching in to them directly.
+
+Avoid surprises, side effects, and letting objects know too much about each other. Work only through public interfaces, and keep them small.
