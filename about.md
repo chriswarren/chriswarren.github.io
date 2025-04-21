@@ -10,4 +10,4 @@ I've worked remotely since 2014 and I love it.
 
 I spend a lot of time thinking about clear code, software development practices, and remote work.
 
-I work at [Arux Software](https://arux.software) as a Principal Developer.
+I work at [Arux Software](https://arux.software) as Director of Engineering.
